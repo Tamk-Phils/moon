@@ -18,14 +18,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         async function checkAccess() {
             // Check for hardcoded admin bypass first
-            const isHardcodedAdmin = localStorage.getItem('crescent_admin_logged_in') === 'true'
-
-            const { data: { session } } = await supabase.auth.getSession()
+            const isHardcodedAdmin = typeof window !== 'undefined' && localStorage.getItem('crescent_admin_logged_in') === 'true'
 
             if (isHardcodedAdmin) {
                 setIsAdmin(true)
                 return
             }
+
+            const { data: { session } } = await supabase.auth.getSession()
 
             if (!session) {
                 router.replace('/login')
@@ -49,7 +49,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         // Subscription for auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            const isHardcodedAdmin = localStorage.getItem('crescent_admin_logged_in') === 'true'
+            const isHardcodedAdmin = typeof window !== 'undefined' && localStorage.getItem('crescent_admin_logged_in') === 'true'
             if (!isHardcodedAdmin && (event === 'SIGNED_OUT' || !session)) {
                 router.replace('/login')
             }

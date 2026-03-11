@@ -33,16 +33,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/logo.png', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/logo.png' },
-    ],
-    shortcut: ['/logo.png'],
-  },
   openGraph: {
     title: 'Crescent Moon Cocker Spaniels | Premium Breeder',
     description: 'Top-quality Cocker Spaniel puppies for sale. Healthy, home-raised, and socialized spaniels from champion bloodlines.',
